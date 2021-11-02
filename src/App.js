@@ -10,6 +10,7 @@ import Mahagony from './assets/Mahogany.png'
 import Oak from './assets/Oak.png'
 import Pagination from './components/Pagination';
 import { useState } from 'react';
+import Cart from './components/Cart';
 
 const data = [
   {
@@ -155,6 +156,7 @@ function App() {
       <ShopInfoContainer>
         <ShopInfo />
         <ItemList currentPosts={currentPosts} />
+        <Cart />
       </ShopInfoContainer>
       <Pagination pageNumbers={pageNumbers} setCurrentPage={setCurrentPage} />
       {/* <Footer /> */}

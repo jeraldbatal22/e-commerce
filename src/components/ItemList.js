@@ -52,6 +52,7 @@ const ItemListContainer = styled.div`
     background: #ffff;
     padding: 10px;
     margin: 0px 0px 20px 0px;
+
   }
 
   .fulldetails .details {
@@ -63,6 +64,8 @@ const ItemListContainer = styled.div`
     font-weight:600;
     line-height: 20px;
     color: black;
+    font-family: 'Open Sans', sans-serif;
+
   }
   
   .details p {
@@ -70,6 +73,8 @@ const ItemListContainer = styled.div`
     font-size: 14px;
     font-weight: 400px;
     line-height: 20px;
+    font-family: 'Open Sans', sans-serif;
+
   }
 
   .details .button {
@@ -88,6 +93,8 @@ const ItemListContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin: 20px 0px;
+    font-family: 'Open Sans', sans-serif;
+
   }
 
   .details button:hover {
