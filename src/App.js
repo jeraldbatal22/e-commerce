@@ -3,11 +3,6 @@ import styled from 'styled-components'
 import ShopInfo from './components/ShopInfo';
 import ItemList from './components/ItemList';
 import Header from './components/Header';
-// import Footer from './components/Footer';
-import Couch1 from './assets/couch1.png'
-import Hardwoods from './assets/Hardwoods.png'
-import Mahagony from './assets/Mahogany.png'
-import Oak from './assets/Oak.png'
 import Pagination from './components/Pagination';
 import { useState, useEffect } from 'react';
 import Cart from './components/CartButton';
@@ -16,12 +11,9 @@ import axios from 'axios';
 import React from 'react'
 
 import {
-  BrowserRouter as Router,
   Route,
-  Routes,
-  Link
+  Routes
 } from "react-router-dom";
-import { Switch } from 'react-router'
 function App() {
   const [data, setData] = useState([])
 
@@ -36,7 +28,6 @@ function App() {
   }
 
   const [carts, setCarts] = useState([])
-  const [isShowProfile, setIsShowProfile] = useState(false)
 
   const addToCart = (item) => {
     setCarts([...carts, { ...item }])
@@ -66,7 +57,7 @@ function App() {
 
   return (
     <>
-      <Header carts={carts.length} isShowProfile={isShowProfile} showCartModal={showCartModal} />
+      <Header carts={carts.length} showCartModal={showCartModal} />
       <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} />
       <Routes>
         <Route exact path="/" element={

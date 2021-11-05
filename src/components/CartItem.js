@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Oak from '../assets/Oak.png'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';

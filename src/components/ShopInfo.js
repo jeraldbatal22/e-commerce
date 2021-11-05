@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import Furniture from '../assets/Furniture.png'
 import InstagramIcon from '@mui/icons-material/Instagram';
-// import { InstagramIcon } from '@material-ui/icons';
 import React from 'react'
 
 const ShopInfo = () => {
