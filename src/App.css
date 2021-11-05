@@ -20,3 +20,7 @@ body {
 ::-webkit-scrollbar {
   width: 6px;
 } 
+
+textarea:focus, input:focus{
+  outline: none;
+}

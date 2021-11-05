@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import React from 'react'
 
 const Pagination = ({ pageNumbers, setCurrentPage }) => {
   const paginate = (pagenumber) => {
@@ -21,25 +22,42 @@ const Pagination = ({ pageNumbers, setCurrentPage }) => {
 export default Pagination
 
 const PaginationContainer = styled.div`
- display: flex;
- justify-content: flex-end;
+  display: flex;
+ justify-content: center;
 
-  .empty {
-    flex: 0.23;
+ .empty {
+    flex: 20%;
   }
-  
+
   .pagination {
-    flex:1;
+    flex:70%;
     display: flex;
     justify-content: center;
+    position: sticky;
+    bottom: 0;
+    margin-bottom: 20px;
+    z-index: 0;
   }
 
   .pagination button {
-    padding: 5px 10px;
-    margin: -40px 5px 30px 0px;
+    padding: 10px 15px;
+    margin: 0px 5px 0px 0px;
     cursor: pointer;
-    background: #1877F2;
+    background: #ffff;
+    color: #1877F2;
+    font-weight: 600;
+    margin-bottom: 10px;
+    border: none;
+  }
+
+  .pagination button:focus {
     color: #ffff;
+    background-color: #1877F2;
+  }
+
+  .pagination button:hover {
+    color: #ffff;
+    background:#1877F2;
   }
 
   @media (max-width:1280px) { 
@@ -47,40 +65,4 @@ const PaginationContainer = styled.div`
       display: none;
     }
   }
-
-  /* @media (max-width:280px) { 
-    .pagination {
-      display: flex;
-      justify-content: flex-end;
-    }
-  }
-
-  @media (max-width:320px) { 
-    .pagination {
-    }
-  } 
-  @media (max-width:415px) { 
-    .pagination {
-      margin-left: 120px;
-
-    }
-  }
-
-  @media (max-width:768px) { 
-    .pagination {
-      margin-left: 50px;
-    }
-    .empty {
-      display: none;
-    }
-  }
-
-  @media (max-width:1024px) { 
-    .pagination {
-      margin-right: 120px;
-    }
-    .empty {
-      display: none;
-    }
-  } */
-  `
+`

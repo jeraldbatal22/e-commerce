@@ -2,7 +2,10 @@ import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
-const Header = () => {
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+const Header = ({ carts, showCartModal }) => {
   const [isShow, setIsShow] = useState(false)
   const showMenu = () => {
     setIsShow(!isShow)
@@ -12,11 +15,21 @@ const Header = () => {
     <HeaderContainer>
       <h1><strong><strong className="pick">Online</strong><strong className="bazaar">Shop</strong></strong></h1>
       <ul className="maxUl">
-        <li>Shops</li>
+        <li>
+          <Link to="/" >
+            Shops
+          </Link>
+        </li>
         <li>Offers</li>
         <li>FAQ</li>
         <li>Contact</li>
+        <li style={{ display: 'flex' }} className="cart_count" onClick={showCartModal}> <p style={{ marginRight: '10px', padding: '0px 7px ', borderRadius: '999px', fontWeight: '900', color: 'black' }}>{carts}</p>Carts</li>
+        <Link to="/user_profile" >
+          <li>Profile</li>
+        </Link>
         <li><button>Join</button></li>
+        <div className="menuIcon"> <p onClick={showCartModal}>{carts}</p></div>
+
         <div onClick={showMenu} className="hamburger">
           {
             isShow ? <CloseIcon /> : <MenuIcon />
@@ -26,10 +39,19 @@ const Header = () => {
       {
         isShow &&
         <ul className="minUl">
-          <li>Shops</li>
+          <li>
+            <Link to="/" >
+              Shops
+            </Link>
+          </li>
           <li>Offers</li>
           <li>FAQ</li>
           <li>Contact</li>
+          <li onClick={showCartModal}>Carts</li>
+          <li>
+            <Link to="/user_profile" >
+              Profile
+            </Link></li>
         </ul>
       }
     </HeaderContainer>
@@ -39,6 +61,8 @@ const Header = () => {
 export default Header
 
 const HeaderContainer = styled.nav`
+  position: sticky;
+  top: 0;
   font-family: 'Open Sans', sans-serif;
   padding: 20px;
   display: flex;
@@ -46,7 +70,7 @@ const HeaderContainer = styled.nav`
   background: #ffff;
 
   h1 {
-    margin:10px;
+    margin:10px 0px;
     display: flex;
     align-items: center;
   }
@@ -54,8 +78,12 @@ const HeaderContainer = styled.nav`
   ul {
     display: flex;
     align-items: center;
-    margin:10px;
     list-style: none;
+  }
+
+  ul a {
+    text-decoration: none;
+    color: black;
   }
   li {
     margin-right: 60px;
@@ -63,10 +91,27 @@ const HeaderContainer = styled.nav`
     font-weight: 400;
     line-height: 24px;
     font-size: 16px;
+    text-decoration: none;
+  }
+
+  li a {
+    color: gray;
+  }
+
+  ul li p:hover {
+    color: #00C58E !important;
+  }
+
+  ul li {
+    cursor: pointer;
   }
 
   .show {
     display: none ;
+  }
+
+  .menuIcon {
+    display: none;
   }
 
   .hamburger {
@@ -81,7 +126,7 @@ const HeaderContainer = styled.nav`
     display: none;
   }
 
-  li:hover {
+  li:hover, li a:hover {
     color: #00C58E;
     cursor: pointer;
     font-weight: 400;
@@ -108,15 +153,16 @@ const HeaderContainer = styled.nav`
     color: #1877F2;
   }
 
-  @media (max-width:780px) { 
-    .maxUl li {
-      display: none;
+  @media (max-width:977px) { 
+    .maxUl li, .cart_count {
+      display: none !important;
     }
     .show {
       display: block;
     }
     .hamburger {
       display: block;
+      cursor: pointer;
     }
     .minUl {
       position: absolute;
@@ -129,9 +175,23 @@ const HeaderContainer = styled.nav`
     }
 
     .minUl li {
-      /* display: flex;
-      justify-content: space-between; */
       margin: 25px;
     }
+
+    .menuIcon {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menuIcon p {
+      color: #ffff;
+      font-weight: 700;
+      padding: 5px 12px;
+      background:#1877F2 ;
+      border-radius: 100%;
+      margin-right: 5px;
+      font-size: 15px;
+    }
   }
+
 `

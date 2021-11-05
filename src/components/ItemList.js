@@ -1,7 +1,7 @@
 import styled from 'styled-components'
+import React from 'react'
 
-const ItemList = ({ currentPosts }) => {
-
+const ItemList = ({ currentPosts, addToCart }) => {
   return (
     <>
       <ItemListContainer>
@@ -10,15 +10,18 @@ const ItemList = ({ currentPosts }) => {
           currentPosts.map((item, index) => {
             return (
               <div key={index} className="fulldetails">
-                <img src={item.img} alt="" height="280" width="305" />
-                <div className="details">
-                  <strong>{item.title}</strong>
-                  <p>${item.amount}.00</p>
-                  <div className="button">
-                    <button>Add To Cart</button>
-                    <button>Checkout</button>
+                <div className="detail">
+                  <img src={item.image} alt="" height="200" width="300" />
+                  <div className="details">
+                    <strong style={{ width: '10px' }}>{item.title.split(' ')[0]} {item.title.split(' ')[1]}</strong>
+                    <p>{item.price * 50} PHP </p>
+                    <div className="button">
+                      <button onClick={() => addToCart(item)}>Add To Cart</button>
+                      <button>Checkout</button>
+                    </div>
                   </div>
                 </div>
+
               </div>
             )
           })
@@ -37,8 +40,8 @@ const ItemListContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  flex: 0.92;
-  margin: 0px 30px 20px 50px ;
+  flex: 70%;
+  margin: 0px 30px 0px 20px ;
   /* overflow-y: scroll; */
  
 
@@ -49,10 +52,13 @@ const ItemListContainer = styled.div`
   .fulldetails {
     cursor: pointer;
     border-radius: 6px;
-    background: #ffff;
     padding: 10px;
     margin: 0px 0px 20px 0px;
 
+  }
+
+  .fulldetails .detail {
+    background: #ffff;
   }
 
   .fulldetails .details {
@@ -94,11 +100,11 @@ const ItemListContainer = styled.div`
     flex-wrap: wrap;
     margin: 20px 0px;
     font-family: 'Open Sans', sans-serif;
-
+    transition: 0.4s;
   }
 
   .details button:hover {
-    background-color: #1D8BF6;
+    background-color: #1597E5;
     padding: 13px 18px;
   }
 
@@ -118,6 +124,15 @@ const ItemListContainer = styled.div`
 
     .details button {
       padding: 10px 10px;
+    }
+  }
+
+  @media (max-width:1280px) { 
+    justify-content: center;
+  
+    img {
+      height: 250px;
+      width: 250px;
     }
   }
 
