@@ -27,7 +27,7 @@ const Header = ({ carts, showCartModal }) => {
         <Link to="/user_profile" >
           <li>Profile</li>
         </Link>
-        <li><button>Join</button></li>
+        <li><button onClick={() => { window.location.href = "/login" }}>Join</button></li>
         <div className="menuIcon"> <p onClick={showCartModal}>{carts}</p></div>
 
         <div onClick={showMenu} className="hamburger">
@@ -133,12 +133,17 @@ const HeaderContainer = styled.nav`
   }
 
   button {
+    cursor: pointer;
     padding: 10px 13px;
     border-radius: 4px;
     border: none;
     background: #1877F2;
     color: #ffff;
     font-family: 'Open Sans', sans-serif;
+  }
+  
+  button:hover {
+    background: #1D60F6;
   }
 
   strong {

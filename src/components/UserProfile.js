@@ -6,52 +6,55 @@ import { Link } from 'react-router-dom'
 const UserProfile = () => {
 
   return (
-    <UserProfileContainer>
-      <h1>User Profile</h1>
-      <div className="userprofile_card">
-        <div className="user_top_body">
-          <div className="img">
-            <img src={user} alt="" width="350" height="400" />
-            <div className="upload-image">
-              <label htmlFor="upload-photo">Upload Profile Picture</label>
-              <input type="file" name="photo" id="upload-photo" />
-            </div>
-          </div>
+    <>
 
-          <div className="user">
-            <div className="form-group">
-              <label>Email</label>
-              <input type="text" defaultValue="jerald@sample.com" />
+      <UserProfileContainer>
+        <h1>User Profile</h1>
+        <div className="userprofile_card">
+          <div className="user_top_body">
+            <div className="img">
+              <img src={user} alt="" width="350" height="400" />
+              <div className="upload-image">
+                <label htmlFor="upload-photo">Upload Profile Picture</label>
+                <input type="file" name="photo" id="upload-photo" />
+              </div>
             </div>
-            <div className="form-group" >
-              <label>Username</label>
-              <input type="text" defaultValue="Jerald" />
-            </div>
-            <div className="form-group">
-              <label>Firstname</label>
-              <input type="text" defaultValue="Jerald" />
-            </div>
-            <div className="form-group">
-              <label>Lastname</label>
-              <input type="text" defaultValue="Batal" />
-            </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input type="password" defaultValue="123456" />
-            </div>
-            <div className="form-group">
-              <label>Confirm Password</label>
-              <input type="password" defaultValue="123456" />
-            </div>
-            <div className="form-button">
-              <button><Link to="/"> BACK </Link></button>
-              <button> UPDATE </button>
-            </div>
-          </div>
 
+            <div className="user">
+              <div className="form-group">
+                <label>Email</label>
+                <input type="text" defaultValue="jerald@sample.com" />
+              </div>
+              <div className="form-group" >
+                <label>Username</label>
+                <input type="text" defaultValue="Jerald" />
+              </div>
+              <div className="form-group">
+                <label>Firstname</label>
+                <input type="text" defaultValue="Jerald" />
+              </div>
+              <div className="form-group">
+                <label>Lastname</label>
+                <input type="text" defaultValue="Batal" />
+              </div>
+              <div className="form-group">
+                <label>Password</label>
+                <input type="password" defaultValue="123456" />
+              </div>
+              <div className="form-group">
+                <label>Confirm Password</label>
+                <input type="password" defaultValue="123456" />
+              </div>
+              <div className="form-button">
+                <button><Link to="/"> BACK </Link></button>
+                <button> UPDATE </button>
+              </div>
+            </div>
+
+          </div>
         </div>
-      </div>
-    </UserProfileContainer>
+      </UserProfileContainer>
+    </>
   )
 }
 

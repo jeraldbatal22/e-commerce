@@ -10,16 +10,7 @@ body {
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar-thumb {
-  background: gray;border-radius: 10px;
-}
 
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-}
-::-webkit-scrollbar {
-  width: 6px;
-} 
 
 textarea:focus, input:focus{
   outline: none;

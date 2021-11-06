@@ -4,9 +4,10 @@ import ShopIcon from '@mui/icons-material/Shop';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Item from './CartItem';
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 
-const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, setIsShowModal }) => {
+const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, setIsShowModal, setisLogin, isLogin }) => {
 
   let message = 0
   carts.map((val) => {
@@ -30,9 +31,20 @@ const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, setIsS
                   return <Item item={item} key={index} />
                 })
               }
-              <div className="checkout-btn">
-                <button className="checkout"> <p>Checkout</p> <strong> $ 450.00</strong></button>
-              </div>
+              {
+                isLogin ?
+                  <Link to="/checkout" onClick={cancelCartModal}>
+                    <div className="checkout-btn">
+                      <button className="checkout" > <p>Checkout</p> <strong> $ 450.00</strong></button>
+                    </div>
+                  </Link> :
+                  <Link to="/login" onClick={cancelCartModal}>
+                    <div className="checkout-btn">
+                      <button className="checkout" > <p>Checkout</p> <strong> $ 450.00</strong></button>
+                    </div>
+                  </Link>
+              }
+
             </div>
           </div>
           :
@@ -73,6 +85,7 @@ const CartContainer = styled.div`
 
   .item_button_body:hover {
     padding: 10px 35px;
+    background: #1877F2;
   }
 
   .item_button_body {
@@ -119,8 +132,20 @@ const CartContainer = styled.div`
   }
 
   .modal-content {
-    overflow-y: scroll;
-    height: 100vh;
+  ::-webkit-scrollbar-thumb {
+    background: gray;border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  } 
+
+  overflow-y: scroll;
+  height: 100vh;
   }
 
   .modal-content .header_modal {

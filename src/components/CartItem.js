@@ -14,7 +14,7 @@ const CartItem = ({ item }) => {
           <RemoveIcon className="remove" />
         </div>
         <div className="image">
-          <img src={item.image} alt="" height="100" width="140" />
+          <img src={item.image} alt="" height="80" width="80" />
         </div>
         <div className="details">
           <strong style={{ fontSize: "13px", fontWeight: "700" }}>{item.title.split(' ')[0] + " " + item.title.split(' ')[1]}</strong>
