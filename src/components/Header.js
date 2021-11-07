@@ -4,8 +4,9 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
-const Header = ({ carts, showCartModal }) => {
+const Header = ({ carts, showCartModal, isLogin }) => {
   const [isShow, setIsShow] = useState(false)
   const showMenu = () => {
     setIsShow(!isShow)
@@ -15,19 +16,29 @@ const Header = ({ carts, showCartModal }) => {
     <HeaderContainer>
       <h1><strong><strong className="pick">Online</strong><strong className="bazaar">Shop</strong></strong></h1>
       <ul className="maxUl">
+
         <li>
           <Link to="/" >
             Shops
           </Link>
         </li>
-        <li>Offers</li>
+        {/* <li>Offers</li>
         <li>FAQ</li>
-        <li>Contact</li>
-        <li style={{ display: 'flex' }} className="cart_count" onClick={showCartModal}> <p style={{ marginRight: '10px', padding: '0px 7px ', borderRadius: '999px', fontWeight: '900', color: 'black' }}>{carts}</p>Carts</li>
-        <Link to="/user_profile" >
-          <li>Profile</li>
-        </Link>
-        <li><button onClick={() => { window.location.href = "/login" }}>Join</button></li>
+        <li>Contact</li> */}
+        {/* <li style={{ display: 'flex' }} className="cart_count" onClick={showCartModal}> <p style={{ marginRight: '10px', padding: '0px 7px ', borderRadius: '999px', fontWeight: '900', color: 'black' }}>{carts}</p>Carts</li> */}
+        {
+          isLogin &&
+          <Link to="/user_profile" >
+            <li>Profile</li>
+          </Link>
+        }
+        <li><button onClick={() => {
+          if (isLogin) {
+            toast.error(`You have already Login`)
+          } else {
+            window.location.href = "/login"
+          }
+        }}>Join</button></li>
         <div className="menuIcon"> <p onClick={showCartModal}>{carts}</p></div>
 
         <div onClick={showMenu} className="hamburger">
@@ -47,11 +58,15 @@ const Header = ({ carts, showCartModal }) => {
           <li>Offers</li>
           <li>FAQ</li>
           <li>Contact</li>
-          <li onClick={showCartModal}>Carts</li>
-          <li>
-            <Link to="/user_profile" >
-              Profile
-            </Link></li>
+          {
+            isLogin &&
+            <li>
+              <Link to="/user_profile" >
+                Profile
+              </Link>
+            </li>
+          }
+
         </ul>
       }
     </HeaderContainer>

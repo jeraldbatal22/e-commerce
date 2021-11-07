@@ -4,14 +4,41 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import CloseIcon from '@mui/icons-material/Close';
 import React from 'react'
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, carts, setCarts }) => {
+
+  const addQuantity = () => {
+    const isExist = carts.find(data =>
+      data.id === item.id
+    )
+
+    setCarts(carts.map(item =>
+      item.id === isExist.id &&
+      { ...isExist, count: item.count += 1 }
+    ))
+  }
+
+  const minusQuantity = () => {
+    const isExist = carts.find(data =>
+      data.id === item.id
+    )
+
+    if (item.count === 1) {
+      setCarts(carts.filter(cart => cart.id !== item.id))
+    } else {
+      setCarts(carts.map(item =>
+        item.id === isExist.id &&
+        { ...isExist, count: item.count -= 1 }
+      ))
+    }
+  }
+
   return (
     <MainItemContainer>
       <ItemContainer>
         <div className="quantity">
-          <AddIcon className="add" />
+          <AddIcon className="add" onClick={addQuantity} />
           <strong>{item.count}</strong>
-          <RemoveIcon className="remove" />
+          <RemoveIcon className="remove" onClick={minusQuantity} />
         </div>
         <div className="image">
           <img src={item.image} alt="" height="80" width="80" />
@@ -63,6 +90,7 @@ const ItemContainer = styled.div`
 
   .quantity .add, .quantity .remove {
     font-size: 14px !important;
+    cursor: pointer;
   }
 
   .image {

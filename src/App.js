@@ -18,10 +18,13 @@ import Checkout from './components/Checkout';
 import Login from './components/Login';
 import PageNotfound from './components/PageNotfound';
 import Registration from './components/Registration';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
   const [data, setData] = useState([])
   const [isLogin, setisLogin] = useState(false)
-
   const [currenPage, setCurrentPage] = useState(1)
   const [postsPerPage] = useState(8)
   const indexOflastPost = currenPage * postsPerPage;
@@ -40,23 +43,19 @@ function App() {
     )
 
     if (!isExist) {
-      setCarts([...carts, { ...item, count: 1, total_price: 0 }])
+      toast.success(`Successfully add to cart ${item.title}`)
+      setCarts([...carts, { ...item, count: 1 }])
     } else {
-      carts.map(item => {
-        if (item.id === isExist.id) {
-          const item_count = item.count += 1
-          item.total_price = item.price * item_count
-          // item.count += 1
-        }
-      })
+      setCarts(carts.map(cart =>
+        cart.id === item.id ? { ...isExist, count: cart.count + 1 } : cart
+      ))
+      console.log(item)
+      console.log(isExist)
     }
-    // ? 
-    //   console.log('already have this item item')
-    //   : carts.push(item)
+
   }
 
   const [isShowModal, setIsShowModal] = useState(false)
-
   const showCartModal = () => {
     setIsShowModal(true)
   }
@@ -80,8 +79,8 @@ function App() {
 
   return (
     <>
-      <Header carts={carts.length} showCartModal={showCartModal} />
-
+      <Header carts={carts.length} showCartModal={showCartModal} isLogin={isLogin} />
+      <ToastContainer classname="alert_message" />
       <Routes>
 
         {/* PUBLICE ROUTES */}
@@ -93,7 +92,7 @@ function App() {
               <ItemList currentPosts={currentPosts} addToCart={addToCart} />
             </ShopInfoContainer>
             <Pagination pageNumbers={pageNumbers} setCurrentPage={setCurrentPage} />
-            <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} isLogin={isLogin} />
+            <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} isLogin={isLogin} setCarts={setCarts} />
           </>
         }>
         </Route>
@@ -121,6 +120,5 @@ export default App;
 
 const ShopInfoContainer = styled.div`
   display: flex;
-  /* flex-wrap: wrap; */
   margin: 20px;
 `

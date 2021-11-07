@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-// import AddIcon from '@mui/icons-material/Add';
 
 const Checkout = ({ carts }) => {
   let prices = []
@@ -52,7 +51,7 @@ const Checkout = ({ carts }) => {
               </div>
             </div>
             <div className="card_1_info">
-              <input placeholder="90 min express deliver" />
+              <input placeholder="Winchester, 40391, United States" />
             </div>
           </div>
 

@@ -3,26 +3,33 @@ import CloseIcon from '@mui/icons-material/Close';
 import ShopIcon from '@mui/icons-material/Shop';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Item from './CartItem';
-import React, { useState } from 'react'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
-const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogin }) => {
+const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogin, setCarts }) => {
   const navigate = useNavigate()
 
   const checkoutCart = () => {
     if (isLogin === true) {
       navigate('/checkout')
     } else {
+      toast.error(`Login first to continue`)
       navigate('/login')
     }
   }
 
   let count = []
-  // let totalPrice = 0
   carts.map((val) => {
-    return count = `${parseFloat(val.price * val.count)}`
+    console.log(val.price, val.count)
+    return count.push(parseFloat(val.price * val.count))
   })
-  console.log(count)
+  let total_price = 0
+
+  count.map(total => (
+    total_price += total
+  ))
+
   return (
     <CartContainer>
       {
@@ -37,15 +44,13 @@ const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogi
               <hr></hr>
               {
                 carts.map((item, index) => {
-                  return <Item item={item} key={index} />
+                  return <Item item={item} key={index} carts={carts} setCarts={setCarts} />
                 })
               }
               {
-                // <div onClick={cancelCartModal}>
                 <div className="checkout-btn" onClick={checkoutCart}>
-                  <button className="checkout" > <p>Checkout</p> <strong>{count * 50} PHP</strong></button>
+                  <button className="checkout" > <p>Checkout</p> <strong>{parseFloat(total_price * 50).toFixed(2)} PHP</strong></button>
                 </div>
-                // </div>
               }
 
             </div>
@@ -55,7 +60,7 @@ const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogi
             <div className="item_button_body" onClick={showCartModal}>
               <ShopIcon className="shop-icon" />
               <div className="item_count"><strong>{carts.length}</strong>  <p>Item('s')</p></div>
-              <strong>{count * 50} PHP</strong>
+              <strong>{parseFloat(total_price * 50).toFixed(2)} PHP</strong>
             </div>
           </div>
       }
@@ -213,8 +218,15 @@ const CartContainer = styled.div`
     }
 
     .item_button {
-      display: none !important;
+      height: 0vh;
+    justify-content: flex-end;
+      /* display: none !important; */
     }
+  .item_button_body {
+    padding: 5px;
+    font-size: 10px;
+  }
+
 
     .modal {
       width: 100% !important;

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import user from '../assets/user.jpg'
+import cover from '../assets/cover.jpg'
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const UserProfile = () => {
 
@@ -13,7 +12,7 @@ const UserProfile = () => {
         <div className="userprofile_card">
           <div className="user_top_body">
             <div className="img">
-              <img src={user} alt="" width="350" height="400" />
+              <img src={cover} alt="" width="350" height="400" />
               <div className="upload-image">
                 <label htmlFor="upload-photo">+ Upload Profile Picture</label>
                 <input type="file" name="photo" id="upload-photo" />
@@ -21,21 +20,22 @@ const UserProfile = () => {
             </div>
 
             <div className="user">
+              <h2>Profile Information</h2>
               <div className="form-group">
                 <label>Email</label>
-                <input type="text" defaultValue="jerald@sample.com" />
+                <input type="text" defaultValue="sample@sample.com" />
               </div>
               <div className="form-group" >
                 <label>Username</label>
-                <input type="text" defaultValue="Jerald" />
+                <input type="text" defaultValue="sample" />
               </div>
               <div className="form-group">
                 <label>Firstname</label>
-                <input type="text" defaultValue="Jerald" />
+                <input type="text" defaultValue="sample" />
               </div>
               <div className="form-group">
                 <label>Lastname</label>
-                <input type="text" defaultValue="Batal" />
+                <input type="text" defaultValue="sample" />
               </div>
               <div className="form-group">
                 <label>Password</label>
@@ -46,8 +46,8 @@ const UserProfile = () => {
                 <input type="password" defaultValue="123456" />
               </div>
               <div className="form-button">
-                <button><Link to="/"> BACK </Link></button>
-                <button> UPDATE </button>
+                {/* <button className="back"><Link to="/"> BACK </Link></button> */}
+                <button className="update"> Update Profile</button>
               </div>
             </div>
 
@@ -125,7 +125,8 @@ const UserProfileContainer = styled.div`
 
   .user_top_body .form-button  {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    /* justify-content: space-between; */
   }
 
   > h1 {
@@ -134,11 +135,29 @@ const UserProfileContainer = styled.div`
     font-size: 3rem;
   }
 
+  .user_top_body .form-button .back a{
+    text-decoration: none;
+    color: black;
+  }
+
   .user_top_body .form-button button {
     padding: 10px 15px;
     cursor: pointer;
     border: none;
   }
+  
+  .user_top_body .form-button .update {
+    font-size: 18px;
+    margin: 15px 0px;
+    width: 100%;
+    background: #4285F4;
+    color: #ffff;
+  }
+  .user_top_body .form-button .update:hover {
+    background: #1D60F6;
+
+  }
+
 
   @media (max-width:540px) { 
     width: 100%;

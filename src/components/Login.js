@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import GoogleIcon from '@mui/icons-material/Google';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
 
 const Login = ({ setisLogin }) => {
   const navigate = useNavigate()
@@ -22,6 +23,7 @@ const Login = ({ setisLogin }) => {
           </div>
           <div className="form-group">
             <button onClick={() => {
+              toast.success(`Successfully login`)
               setisLogin(true)
               navigate('/')
             }}>Login</button>
