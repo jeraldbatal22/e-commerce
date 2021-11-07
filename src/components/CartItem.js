@@ -26,8 +26,9 @@ const CartItem = ({ item, carts, setCarts }) => {
       setCarts(carts.filter(cart => cart.id !== item.id))
     } else {
       setCarts(carts.map(item =>
-        item.id === isExist.id &&
-        { ...isExist, count: item.count -= 1 }
+        item.id === isExist.id ?
+          { ...isExist, count: item.count -= 1 }
+          : item
       ))
     }
   }
