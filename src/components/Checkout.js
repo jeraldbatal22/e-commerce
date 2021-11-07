@@ -1,11 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 
-const Checkout = () => {
+const Checkout = ({ carts }) => {
+  let prices = []
+  let totalPrice = 0
+  carts.map(cart => {
+    return prices.push((cart.price * 50) * cart.count)
+  })
+
+  prices.map(price => {
+    return totalPrice += price
+  })
+
   return (
     <>
-
       <CheckoutContainer>
         <LeftCheckout>
           <div className="card">
@@ -14,57 +23,49 @@ const Checkout = () => {
                 <h1><strong>1</strong> Contact Number</h1>
               </div>
               <div className="card_button">
-                <AddIcon className="add_icon" />
-                <button>Update</button>
               </div>
             </div>
             <div className="card_1_info">
-              <p>19365141641631</p>
+              <input placeholder="19365141641631" />
             </div>
           </div>
 
           <div className="card">
             <div className="card_1">
               <div>
-                <h1><strong>1</strong> Billing Address</h1>
+                <h1><strong>2</strong> Billing Address</h1>
               </div>
               <div className="card_button">
-                <AddIcon className="add_icon" />
-                <button>Add</button>
               </div>
             </div>
             <div className="card_1_info">
-              <p>2148 Straford Park, KY, Winchester, 40391, United States</p>
+              <input placeholder="2148 Straford Park, KY, Winchester, 40391, United States" />
             </div>
           </div>
 
           <div className="card">
             <div className="card_1">
               <div>
-                <h1><strong>1</strong> Shipping Address</h1>
+                <h1><strong>3</strong> Shipping Address</h1>
               </div>
               <div className="card_button">
-                <AddIcon className="add_icon" />
-                <button>Add</button>
               </div>
             </div>
             <div className="card_1_info">
-              <p>90 min express delivery</p>
+              <input placeholder="90 min express deliver" />
             </div>
           </div>
 
           <div className="card">
             <div className="card_1">
               <div>
-                <h1><strong>1</strong> Delivery Schedule</h1>
+                <h1><strong>4</strong> Delivery Schedule</h1>
               </div>
               <div className="card_button">
-                <AddIcon className="add_icon" />
-                <button>Add</button>
               </div>
             </div>
             <div className="card_1_info">
-              <p>90 min express delivery</p>
+              <input placeholder="90 min express deliver" />
             </div>
           </div>
 
@@ -74,23 +75,19 @@ const Checkout = () => {
           <div>
             <h2>Your Order</h2>
           </div>
-          <div className="items">
-            <span>1 x Brown Hardwood Double Bed | 1 pc(s)</span>
-            <span>$220.00</span>
-          </div>
-          <div className="items">
-            <span>1 x Brown Hardwood Double Bed | 1 pc(s)</span>
-            <span>$220.00</span>
-          </div>
-          <div className="items">
-            <span>1 x Brown Hardwood Double Bed | 1 pc(s)</span>
-            <span>$220.00</span>
-          </div>
+          {
+            carts.map((item, index) => {
+              return <div className="items" key={index}>
+                <span>{item.count} {item.title.split(' ')[0] + " " + item.title.split(' ')[1] + " " + item.title.split(' ')[2]} | {item.count} pc(s)</span>
+                <span>{(item.price * 50) * item.count} PHP</span>
+              </div>
+            })
+          }
           <hr></hr>
           <div className="items_total">
             <div>
               <span>Subtotal</span>
-              <span>$220.00</span>
+              <span>{totalPrice} PHP</span>
             </div>
             <div >
               <span>Tax</span>
@@ -158,11 +155,13 @@ const LeftCheckout = styled.div`
   }
   
 
-  > div .card_1_info {
+  > div .card_1_info input {
+    width: 100%;
     display: flex;
-    border: 1px solid #1877F2;
+    border: 1px ;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 2px #888888;
     border-radius: 7px;
-    width: 40%;
     padding: 14px;
   }
 

@@ -10,7 +10,7 @@ const CartItem = ({ item }) => {
       <ItemContainer>
         <div className="quantity">
           <AddIcon className="add" />
-          <strong>1</strong>
+          <strong>{item.count}</strong>
           <RemoveIcon className="remove" />
         </div>
         <div className="image">
@@ -18,11 +18,11 @@ const CartItem = ({ item }) => {
         </div>
         <div className="details">
           <strong style={{ fontSize: "13px", fontWeight: "700" }}>{item.title.split(' ')[0] + " " + item.title.split(' ')[1]}</strong>
-          <strong className="price">{item.price} PHP</strong>
-          <strong>1 X 1 pc(s)</strong>
+          <strong className="price">{item.price * 50} PHP</strong>
+          <strong>{item.count} X 1 pc(s)</strong>
         </div>
         <div className="total-price">
-          <strong>$300.00</strong>
+          <strong>{(item.price * 50) * item.count} PHP</strong>
         </div>
         <div className="remove-to-cart">
           <CloseIcon className="close-to-cart" />

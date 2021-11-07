@@ -15,7 +15,7 @@ const UserProfile = () => {
             <div className="img">
               <img src={user} alt="" width="350" height="400" />
               <div className="upload-image">
-                <label htmlFor="upload-photo">Upload Profile Picture</label>
+                <label htmlFor="upload-photo">+ Upload Profile Picture</label>
                 <input type="file" name="photo" id="upload-photo" />
               </div>
             </div>
@@ -111,11 +111,16 @@ const UserProfileContainer = styled.div`
 
   }
 
+  .user_top_body .form-group label {
+    font-size: 14px;
+  }
+
   .user_top_body .form-group input {
     padding: 10px 15px;
     border: none;
-    box-shadow: 0px 1px;
-    
+    border: 1px ;
+    padding: 10px;
+    box-shadow: 2px 2px 2px 2px #888888;
   }
 
   .user_top_body .form-button  {

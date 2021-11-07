@@ -17,6 +17,7 @@ import {
 import Checkout from './components/Checkout';
 import Login from './components/Login';
 import PageNotfound from './components/PageNotfound';
+import Registration from './components/Registration';
 function App() {
   const [data, setData] = useState([])
   const [isLogin, setisLogin] = useState(false)
@@ -34,7 +35,24 @@ function App() {
   const [carts, setCarts] = useState([])
 
   const addToCart = (item) => {
-    setCarts([...carts, { ...item }])
+    const isExist = carts.find(data =>
+      data.id === item.id
+    )
+
+    if (!isExist) {
+      setCarts([...carts, { ...item, count: 1, total_price: 0 }])
+    } else {
+      carts.map(item => {
+        if (item.id === isExist.id) {
+          const item_count = item.count += 1
+          item.total_price = item.price * item_count
+          // item.count += 1
+        }
+      })
+    }
+    // ? 
+    //   console.log('already have this item item')
+    //   : carts.push(item)
   }
 
   const [isShowModal, setIsShowModal] = useState(false)
@@ -55,6 +73,7 @@ function App() {
     setData(res.data)
     return res
   }
+
   useEffect(() => {
     fetchProduct()
   }, [])
@@ -62,7 +81,6 @@ function App() {
   return (
     <>
       <Header carts={carts.length} showCartModal={showCartModal} />
-      <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} />
 
       <Routes>
 
@@ -75,20 +93,24 @@ function App() {
               <ItemList currentPosts={currentPosts} addToCart={addToCart} />
             </ShopInfoContainer>
             <Pagination pageNumbers={pageNumbers} setCurrentPage={setCurrentPage} />
-            <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} setisLogin={setisLogin} isLogin={isLogin} />
+            <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} isLogin={isLogin} />
           </>
         }>
         </Route>
         <Route path="/:pageName" element={<PageNotfound />}></Route>
-        <Route path="/login" element={<Login setisLogin={setisLogin} />}></Route>
 
         {/* PROTECTED ROUTES REQUIRED LOGIN */}
         {
-          isLogin &&
-          <>
-            <Route path="/checkout" element={<Checkout setisLogin={setisLogin} isLogin={isLogin} />}></Route>
-            <Route path="/user_profile" element={<UserProfile isLogin={isLogin} />}></Route>
-          </>
+          isLogin ?
+            <>
+              <Route path="/checkout" element={<Checkout setisLogin={setisLogin} isLogin={isLogin} carts={carts} />}></Route>
+              <Route path="/user_profile" element={<UserProfile isLogin={isLogin} />}></Route>
+            </>
+            :
+            <>
+              <Route path="/login" element={<Login setisLogin={setisLogin} />}></Route>
+              <Route path="/registration" element={<Registration setisLogin={setisLogin} />}></Route>
+            </>
         }
       </Routes>
     </>

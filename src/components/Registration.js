@@ -1,40 +1,45 @@
 import React from 'react'
 import styled from 'styled-components'
-import GoogleIcon from '@mui/icons-material/Google';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import { useNavigate } from 'react-router';
 
-const Login = ({ setisLogin }) => {
+const Registration = ({ setisLogin }) => {
   const navigate = useNavigate()
   return (
     <LoginContainer>
       <div className="login_card">
         <h1 style={{ marginBottom: '30px', fontWeight: '600' }}><strong><strong>Online</strong><strong style={{ color: '#4285F4' }}>Shop</strong></strong></h1>
-        <p style={{ marginBottom: '30px', color: 'gray' }}>Login with your email & password</p>
+        <p style={{ marginBottom: '30px', color: 'gray' }}>By signing up, you agree to ourterms & policy</p>
         <div>
+          <div className="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="sample" />
+          </div>
           <div className="form-group">
             <label>Email</label>
             <input type="text" placeholder="sample@gmail.com" />
+          </div>
+          <div className="form-group">
+            <label>Addresss</label>
+            <input type="text" placeholder="Brgy Street City" />
           </div>
           <div className="form-group">
             <label>Password</label>
             <input type="password" placeholder="**********" />
           </div>
           <div className="form-group">
+            <label>Password Confirmation</label>
+            <input type="password" placeholder="**********" />
+          </div>
+          <div className="form-group">
             <button onClick={() => {
               setisLogin(true)
-              navigate('/')
-            }}>Login</button>
-          </div>
-          <hr></hr>
-          <div className="group_button">
-            <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><GoogleIcon style={{ marginRight: '10px' }} /> Login With Google</button>
-            <button style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><PhoneAndroidIcon style={{ marginRight: '10px' }} /> Login With Mobile Number</button>
+              navigate('/checkout')
+            }}>Register</button>
           </div>
           <hr></hr>
           <div className="footer" style={{ marginTop: '30px' }}>
-            <span>Don't have any account?</span>
-            <a href="/registration">Register</a>
+            <span>Already have an account?</span>
+            <a href="/login">Login</a>
           </div>
         </div>
       </div>
@@ -42,7 +47,7 @@ const Login = ({ setisLogin }) => {
   )
 }
 
-export default Login
+export default Registration
 
 const LoginContainer = styled.div`
   display: flex;

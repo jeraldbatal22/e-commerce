@@ -3,17 +3,26 @@ import CloseIcon from '@mui/icons-material/Close';
 import ShopIcon from '@mui/icons-material/Shop';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Item from './CartItem';
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogin }) => {
+  const navigate = useNavigate()
 
-const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, setIsShowModal, setisLogin, isLogin }) => {
+  const checkoutCart = () => {
+    if (isLogin === true) {
+      navigate('/checkout')
+    } else {
+      navigate('/login')
+    }
+  }
 
-  let message = 0
+  let count = []
+  // let totalPrice = 0
   carts.map((val) => {
-    return message = `${val.price * carts.length}`
+    return count = `${parseFloat(val.price * val.count)}`
   })
-
+  console.log(count)
   return (
     <CartContainer>
       {
@@ -32,17 +41,11 @@ const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, setIsS
                 })
               }
               {
-                isLogin ?
-                  <Link to="/checkout" onClick={cancelCartModal}>
-                    <div className="checkout-btn">
-                      <button className="checkout" > <p>Checkout</p> <strong> $ 450.00</strong></button>
-                    </div>
-                  </Link> :
-                  <Link to="/login" onClick={cancelCartModal}>
-                    <div className="checkout-btn">
-                      <button className="checkout" > <p>Checkout</p> <strong> $ 450.00</strong></button>
-                    </div>
-                  </Link>
+                // <div onClick={cancelCartModal}>
+                <div className="checkout-btn" onClick={checkoutCart}>
+                  <button className="checkout" > <p>Checkout</p> <strong>{count * 50} PHP</strong></button>
+                </div>
+                // </div>
               }
 
             </div>
@@ -52,7 +55,7 @@ const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, setIsS
             <div className="item_button_body" onClick={showCartModal}>
               <ShopIcon className="shop-icon" />
               <div className="item_count"><strong>{carts.length}</strong>  <p>Item('s')</p></div>
-              <strong>{message} PHP</strong>
+              <strong>{count * 50} PHP</strong>
             </div>
           </div>
       }

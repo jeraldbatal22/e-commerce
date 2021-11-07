@@ -10,6 +10,11 @@ const PageNotfound = () => {
     message = ''
     window.location.href = "/login"
   }
+  // else if (params.pageName === 'login' || params.pageName === 'registration') {
+  //   message = 'You Have Already Login'
+  //   window.location.href = "/"
+  // }
+
   return (
     <PageNotFoundContainer>
       <h1>{message}</h1>
