@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Checkout = ({ carts }) => {
+const Checkout = ({ carts, checkout }) => {
   let prices = []
   let totalPrice = 0
   carts.map(cart => {
@@ -75,18 +75,28 @@ const Checkout = ({ carts }) => {
             <h2>Your Order</h2>
           </div>
           {
-            carts.map((item, index) => {
-              return <div className="items" key={index}>
-                <span>{item.count} {item.title.split(' ')[0] + " " + item.title.split(' ')[1] + " " + item.title.split(' ')[2]} | {item.count} pc(s)</span>
-                <span>{(item.price * 50) * item.count} PHP</span>
+            checkout !== null ?
+              <div className="items">
+                <span>1 {checkout.title.split(' ')[0] + " " + checkout.title.split(' ')[1] + " " + checkout.title.split(' ')[2]} | 1 pc(s)</span>
+                <span>{checkout.price} PHP</span>
               </div>
-            })
+              :
+              carts.map((item, index) => {
+                return <div className="items" key={index}>
+                  <span>{item.count} {item.title.split(' ')[0] + " " + item.title.split(' ')[1] + " " + item.title.split(' ')[2]} | {item.count} pc(s)</span>
+                  <span>{(item.price * 50) * item.count} PHP</span>
+                </div>
+              })
           }
           <hr></hr>
           <div className="items_total">
             <div>
               <span>Subtotal</span>
-              <span>{totalPrice} PHP</span>
+              <span>{
+                checkout !== null ?
+                  checkout.price
+                  : totalPrice
+              } PHP</span>
             </div>
             <div >
               <span>Tax</span>

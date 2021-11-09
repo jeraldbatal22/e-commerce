@@ -36,6 +36,7 @@ function App() {
   }
 
   const [carts, setCarts] = useState([])
+  const [checkout, setCheckout] = useState(null)
 
   const addToCart = (item) => {
     const isExist = carts.find(data =>
@@ -89,10 +90,19 @@ function App() {
           <>
             <ShopInfoContainer>
               <ShopInfo />
-              <ItemList currentPosts={currentPosts} addToCart={addToCart} />
+              <ItemList currentPosts={currentPosts} addToCart={addToCart} isLogin={isLogin} checkout={checkout} setCheckout={setCheckout} />
             </ShopInfoContainer>
             <Pagination pageNumbers={pageNumbers} setCurrentPage={setCurrentPage} />
-            <Cart carts={carts} showCartModal={showCartModal} cancelCartModal={cancelCartModal} setIsShowModal={setIsShowModal} isShowModal={isShowModal} isLogin={isLogin} setCarts={setCarts} />
+            <Cart
+              carts={carts}
+              showCartModal={showCartModal}
+              cancelCartModal={cancelCartModal}
+              setIsShowModal={setIsShowModal}
+              isShowModal={isShowModal}
+              isLogin={isLogin}
+              setCarts={setCarts}
+              setCheckout={setCheckout}
+            />
           </>
         }>
         </Route>
@@ -102,7 +112,7 @@ function App() {
         {
           isLogin ?
             <>
-              <Route path="/checkout" element={<Checkout setisLogin={setisLogin} isLogin={isLogin} carts={carts} />}></Route>
+              <Route path="/checkout" element={<Checkout setisLogin={setisLogin} isLogin={isLogin} carts={carts} checkout={checkout} />}></Route>
               <Route path="/user_profile" element={<UserProfile isLogin={isLogin} />}></Route>
             </>
             :

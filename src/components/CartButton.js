@@ -7,11 +7,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
-const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogin, setCarts }) => {
+const CartButton = ({ carts, showCartModal, cancelCartModal, isShowModal, isLogin, setCarts, setCheckout }) => {
   const navigate = useNavigate()
 
   const checkoutCart = () => {
     if (isLogin === true) {
+      setCheckout(null)
       navigate('/checkout')
     } else {
       toast.error(`Login first to continue`)
@@ -140,6 +141,10 @@ const CartContainer = styled.div`
   }
 
   .modal-content {
+    
+  overflow-y: scroll;
+  height: 100vh;
+  
   ::-webkit-scrollbar-thumb {
     background: gray;border-radius: 10px;
   }
@@ -152,8 +157,6 @@ const CartContainer = styled.div`
     width: 6px;
   } 
 
-  overflow-y: scroll;
-  height: 100vh;
   }
 
   .modal-content .header_modal {

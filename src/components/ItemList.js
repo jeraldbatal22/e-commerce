@@ -1,7 +1,20 @@
 import styled from 'styled-components'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
 
-const ItemList = ({ currentPosts, addToCart }) => {
+const ItemList = ({ currentPosts, addToCart, isLogin, checkout, setCheckout }) => {
+  const navigate = useNavigate()
+
+  const checkoutCart = (item) => {
+    if (isLogin === true) {
+      setCheckout(item)
+      navigate('/checkout')
+    } else {
+      toast.error(`Login first to continue`)
+      navigate('/login')
+    }
+  }
   return (
     <>
       <ItemListContainer>
@@ -17,7 +30,7 @@ const ItemList = ({ currentPosts, addToCart }) => {
                     <p>{item.price * 50} PHP </p>
                     <div className="button">
                       <button onClick={() => addToCart(item)}>Add To Cart</button>
-                      <button>Checkout</button>
+                      <button onClick={() => checkoutCart(item)}>Checkout</button>
                     </div>
                   </div>
                 </div>
